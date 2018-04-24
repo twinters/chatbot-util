@@ -1,4 +1,4 @@
-package be.thomaswinters.bot.data;
+package be.thomaswinters.chatbot.data;
 
 import java.util.Optional;
 

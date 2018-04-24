@@ -1,6 +1,6 @@
-package be.thomaswinters.bot.util;
+package be.thomaswinters.chatbot.util;
 
-import be.thomaswinters.bot.data.IChatMessage;
+import be.thomaswinters.chatbot.data.IChatMessage;
 import be.thomaswinters.wordcounter.WordCounter;
 
 import java.util.function.BiFunction;

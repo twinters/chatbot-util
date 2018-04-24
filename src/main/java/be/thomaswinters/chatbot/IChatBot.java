@@ -1,6 +1,6 @@
-package be.thomaswinters.bot;
+package be.thomaswinters.chatbot;
 
-import be.thomaswinters.bot.data.IChatMessage;
+import be.thomaswinters.chatbot.data.IChatMessage;
 
 import java.util.Optional;
 

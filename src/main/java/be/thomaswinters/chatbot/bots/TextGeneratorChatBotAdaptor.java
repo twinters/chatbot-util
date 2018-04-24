@@ -1,13 +1,13 @@
-package be.thomaswinters.bot.bots;
+package be.thomaswinters.chatbot.bots;
 
-import be.thomaswinters.bot.IChatBot;
-import be.thomaswinters.bot.data.IChatMessage;
+import be.thomaswinters.chatbot.IChatBot;
+import be.thomaswinters.chatbot.data.IChatMessage;
 import be.thomaswinters.generator.generators.IGenerator;
 
 import java.util.Optional;
 
 /**
- * Bot using the capabilities of the text generator bot to reply to people (without using the chat messages)
+ * Bot using the capabilities of the text generator chatbot to reply to people (without using the chat messages)
  */
 public class TextGeneratorChatBotAdaptor implements IChatBot {
     private final IGenerator<String> bot;
