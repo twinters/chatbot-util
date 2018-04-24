@@ -30,6 +30,6 @@ public class ChatMessage implements IChatMessage {
 
     @Override
     public String toString() {
-        return user + ": " + message;
+        return user.getScreenName() + ": " + message;
     }
 }
