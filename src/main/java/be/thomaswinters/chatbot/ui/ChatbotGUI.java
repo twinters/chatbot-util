@@ -37,6 +37,7 @@ public class ChatbotGUI {
         });
         chatColours.put(chatBotChatBox.getUser(), "#103090");
         chatColours.put(chatBotChatBox.getChatBotUser(), "#903010");
+//        chatHistory.setMaximumSize(new Dimension(scrollPane.getWidth(), -1));
     }
 
     private void addLine(String line) {
