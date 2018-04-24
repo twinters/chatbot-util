@@ -11,6 +11,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/../generator-util" />
+            <option value="$PROJECT_DIR$/../text-util" />
           </set>
         </option>
         <option name="useAutoImport" value="true" />
