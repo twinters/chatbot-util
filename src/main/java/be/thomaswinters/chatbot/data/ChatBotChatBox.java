@@ -3,16 +3,19 @@ package be.thomaswinters.chatbot.data;
 import be.thomaswinters.chatbot.IChatBot;
 
 import java.util.function.BiConsumer;
+import java.util.stream.Stream;
 
 public class ChatBotChatBox {
     private final IChatBot chatBot;
     private final ChatBox chatBox = new ChatBox();
     private final ChatUser user = new ChatUser("Me");
-    private final ChatUser botUser;
+    private final ChatUser botUser = new ChatUser("Bot");
 
-    public ChatBotChatBox(IChatBot chatBot) {
+    @SafeVarargs
+    public ChatBotChatBox(IChatBot chatBot, BiConsumer<ChatBox, IChatMessage>... chatMessageConsumers) {
         this.chatBot = chatBot;
-        this.botUser = new ChatUser(chatBot.getClass().getSimpleName());
+//        this.botUser = new ChatUser(chatBot.getClass().getSimpleName());
+        Stream.of(chatMessageConsumers).forEach(this::addNewChatMessageListener);
         this.chatBox.addNewChatMessageListener(this::reactWithChatbot);
     }
 
@@ -32,6 +35,10 @@ public class ChatBotChatBox {
 
     public ChatUser getUser() {
         return user;
+    }
+
+    public ChatUser getChatBotUser() {
+        return botUser;
     }
 
     public IChatBot getChatBot() {

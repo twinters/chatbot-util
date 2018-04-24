@@ -18,4 +18,9 @@ public class ChatUser implements IChatUser {
     public String getScreenName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

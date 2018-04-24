@@ -23,7 +23,7 @@ public class ChatbotCLI {
 
     public void run() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Chat with " + chatBotChatBox.getChatBot() + " activated. Say hello!");
+        System.out.println("Chat with " + chatBotChatBox.getChatBotUser() + " activated. Say hello!");
         while (true) {
             String line = sc.nextLine();
             chatBotChatBox.postReaction(chatBotChatBox.getUser(), line);
