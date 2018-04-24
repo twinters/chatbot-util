@@ -42,7 +42,11 @@ public class ChatbotGUI {
     private void addLine(String line) {
         lines.add(line);
         chatHistory.setText("<html>" + lines.stream().collect(Collectors.joining("<br>")) + "</html>");
-        scrollPane.getVerticalScrollBar().setValue(scrollPane.getVerticalScrollBar().getMaximum());
+        SwingUtilities.invokeLater(() -> {
+                    scrollPane.getVerticalScrollBar().setValue(scrollPane.getVerticalScrollBar().getMaximum());
+                    chatHistory.revalidate();
+                }
+        );
     }
 
     private final Map<IChatUser, String> chatColours = new HashMap<>();
@@ -50,7 +54,6 @@ public class ChatbotGUI {
     private void displayReaction(ChatBox chatBox, IChatMessage iChatMessage) {
         addLine("<font color='" + chatColours.get(iChatMessage.getUser()) + "'>" + iChatMessage.getUser() + ": </font>"
                 + iChatMessage.getMessage());
-        chatHistory.validate();
     }
 
     public void run() {

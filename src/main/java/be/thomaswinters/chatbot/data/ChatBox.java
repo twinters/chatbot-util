@@ -12,7 +12,7 @@ public class ChatBox {
     public void postReaction(IChatUser user, String message) {
         IChatMessage chatMessage = new ChatMessage(Optional.ofNullable(latestMessage), message, user);
         this.latestMessage = chatMessage;
-        newChatConsumers.forEach(e -> e.accept(this, chatMessage));
+        newChatConsumers.stream().forEach(e -> e.accept(this, chatMessage));
     }
 
     public void addNewChatMessageListener(BiConsumer<ChatBox, IChatMessage> listener) {

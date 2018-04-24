@@ -21,7 +21,10 @@ public class ChatBotChatBox {
 
     private void reactWithChatbot(ChatBox chatBox, IChatMessage iChatMessage) {
         if (iChatMessage.getUser().equals(user)) {
-            chatBot.generateReply(iChatMessage).ifPresent(reply -> chatBox.postReaction(botUser, reply));
+            Runnable botThread = () -> chatBot
+                    .generateReply(iChatMessage)
+                    .ifPresent(reply -> chatBox.postReaction(botUser, reply));
+            new Thread(botThread).start();
         }
     }
 
