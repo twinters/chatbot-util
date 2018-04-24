@@ -1,7 +1,9 @@
 package be.thomaswinters.chatbot.data;
 
+import java.util.Optional;
+
 public interface IChatUser {
-    String getFullName();
+    Optional<String> getFullName();
 
     String getScreenName();
 }
