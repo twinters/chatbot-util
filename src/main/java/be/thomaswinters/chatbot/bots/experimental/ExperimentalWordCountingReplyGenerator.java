@@ -7,15 +7,17 @@ import be.thomaswinters.generator.generators.IGenerator;
 import be.thomaswinters.wordcounter.WordCounter;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 public class ExperimentalWordCountingReplyGenerator extends WordCounterBasedReplier {
+
 
     public ExperimentalWordCountingReplyGenerator(IGenerator<String> tweetGenerator,
                                                   WordCounter corpusWordCounter, int replyGenerations,
                                                   ConversationCollector weightedConversationCollector) {
         super(tweetGenerator, corpusWordCounter, replyGenerations, weightedConversationCollector);
     }
+
 
     @Override
     public double calculateScore(StringWordCounter inputMessage, WordCounter corpusWordCounter, StringWordCounter proposed) {
@@ -36,13 +38,14 @@ public class ExperimentalWordCountingReplyGenerator extends WordCounterBasedRepl
 
     public static double getRelativeAmountOfSameWordsAs(
             @NotNull WordCounter wordCount, @NotNull WordCounter other, @NotNull WordCounter relativeTo,
-            Function<Double, Function<Double, Double>> countBest) {
+            BiFunction<Double, Double, Double> countBest) {
 
         return other.getWordCount().elementSet().stream()
                 .filter(wordCount::contains)
                 .mapToDouble(word -> {
-                    double sameOccurrences = countBest.apply((double) wordCount.getCount(word)).apply((double) other.getCount(word));
+                    double sameOccurrences = countBest.apply((double) wordCount.getCount(word), (double) other.getCount(word));
                     double corpusOccurrences = Math.pow(relativeTo.getCount(word), 2);
+//                    double corpusOccurrences = ((double) relativeTo.getCount(word) + 1d) / relativeTo.getSize();
                     return (sameOccurrences) / Math.max(1, corpusOccurrences);
                 })
                 .sum();
@@ -50,12 +53,12 @@ public class ExperimentalWordCountingReplyGenerator extends WordCounterBasedRepl
 
     public static double getRelativeAmountOfSameWordsAs(
             @NotNull WordCounter wordCount, @NotNull WordCounter other, @NotNull WordCounter relativeTo) {
-        return getRelativeAmountOfSameWordsAs(wordCount, other, relativeTo, e -> f -> Math.min(e, f));
+        return getRelativeAmountOfSameWordsAs(wordCount, other, relativeTo, Math::min);
     }
 
     public static double getRelativeAmountOfSameMaxWordsAs(
             @NotNull WordCounter wordCount, @NotNull WordCounter other, @NotNull WordCounter relativeTo) {
-        return getRelativeAmountOfSameWordsAs(wordCount, other, relativeTo, e -> f -> Math.max(e, f));
+        return getRelativeAmountOfSameWordsAs(wordCount, other, relativeTo, Math::max);
     }
 
 

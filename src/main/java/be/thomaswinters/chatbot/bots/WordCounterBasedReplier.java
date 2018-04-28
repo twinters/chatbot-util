@@ -28,14 +28,13 @@ public abstract class WordCounterBasedReplier implements IChatBot {
 
     @Override
     public Optional<String> generateReply(IChatMessage message) {
-        return replyGenerator(message).generate();
+        return createReplyGenerator(message).generate();
     }
 
-    public IGenerator<String> replyGenerator(IChatMessage chatMessage) {
+    public IGenerator<String> createReplyGenerator(IChatMessage chatMessage) {
         StringWordCounter inputMessageWc = new StringWordCounter(
                 chatMessage.getMessage(),
                 weightedConversationCollector.collectConversation(chatMessage));
-
         return tweetGenerator
                 .mapToDifferent(StringWordCounter::new)
                 .max(replyGenerations,
@@ -44,5 +43,6 @@ public abstract class WordCounterBasedReplier implements IChatBot {
     }
 
     public abstract double calculateScore(StringWordCounter inputMessage,
-                                          WordCounter corpusWordCounter, StringWordCounter proposed);
+                                          WordCounter corpusWordCounter,
+                                          StringWordCounter proposed);
 }
