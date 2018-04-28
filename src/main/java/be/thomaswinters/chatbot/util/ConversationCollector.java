@@ -44,12 +44,11 @@ public class ConversationCollector {
         WordCounter.Builder b = WordCounter.builder();
         IChatMessage currentMessage = message;
         for (int i = 0; i < maxMessages; i++) {
-
             BiFunction<IChatMessage, Integer, Integer> weightMapper =
                     currentMessage.getUser().getScreenName().toLowerCase().equals(userName) ?
                             ownMessagesWeightMapper : otherMessagesWeightMapper;
 
-            b.addWeighted(message.getMessage(), weightMapper.apply(message, i));
+            b.addWeighted(currentMessage.getMessage(), weightMapper.apply(currentMessage, i));
             if (currentMessage.getPrevious().isPresent()) {
                 currentMessage = currentMessage.getPrevious().get();
             } else {
