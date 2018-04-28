@@ -26,6 +26,6 @@ public class StringWordCounter {
 
     @Override
     public String toString() {
-        return text;
+        return text + " -> " + wc;
     }
 }
