@@ -23,8 +23,8 @@ public class ChatbotGUI {
 
     private final List<String> lines = new ArrayList<>();
 
-    public ChatbotGUI(IChatBot chatBot) {
-        this.chatBotChatBox = new ChatBotChatBox(chatBot, this::displayReaction);
+    public ChatbotGUI(IChatBot chatBot, String botName) {
+        this.chatBotChatBox = new ChatBotChatBox(chatBot, botName, this::displayReaction);
         chatInput.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -38,6 +38,10 @@ public class ChatbotGUI {
         chatColours.put(chatBotChatBox.getUser(), "#103090");
         chatColours.put(chatBotChatBox.getChatBotUser(), "#903010");
 //        chatHistory.setMaximumSize(new Dimension(scrollPane.getWidth(), -1));
+    }
+
+    public ChatbotGUI(IChatBot chatBot) {
+        this(chatBot, "Bot");
     }
 
     private void addLine(String line) {
