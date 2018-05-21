@@ -36,10 +36,10 @@ public abstract class WordCounterBasedReplier implements IChatBot {
                 chatMessage.getMessage(),
                 weightedConversationCollector.collectConversation(chatMessage));
         return tweetGenerator
-                .mapToDifferent(StringWordCounter::new)
+                .map(StringWordCounter::new)
                 .max(replyGenerations,
                         Comparator.comparingDouble(e -> calculateScore(inputMessageWc, corpusWordCounter, e)))
-                .mapToDifferent(StringWordCounter::getText);
+                .map(StringWordCounter::getText);
     }
 
     public abstract double calculateScore(StringWordCounter inputMessage,
