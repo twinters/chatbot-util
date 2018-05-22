@@ -4,7 +4,12 @@ import java.util.Optional;
 
 public interface IChatMessage {
 
-    String getMessage();
+    @Deprecated
+    default String getMessage() {
+        return getText();
+    }
+
+    String getText();
 
     Optional<IChatMessage> getPrevious();
 

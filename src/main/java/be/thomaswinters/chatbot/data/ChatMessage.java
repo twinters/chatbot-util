@@ -14,7 +14,7 @@ public class ChatMessage implements IChatMessage {
     }
 
     @Override
-    public String getMessage() {
+    public String getText() {
         return message;
     }
 

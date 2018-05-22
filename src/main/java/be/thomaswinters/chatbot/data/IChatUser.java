@@ -6,4 +6,6 @@ public interface IChatUser {
     Optional<String> getFullName();
 
     String getScreenName();
+
+    long getId();
 }
