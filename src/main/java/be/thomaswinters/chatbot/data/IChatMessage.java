@@ -14,4 +14,6 @@ public interface IChatMessage {
     Optional<IChatMessage> getPrevious();
 
     IChatUser getUser();
+
+    Optional<String> getURL();
 }

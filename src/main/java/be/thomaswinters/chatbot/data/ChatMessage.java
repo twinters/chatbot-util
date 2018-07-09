@@ -29,6 +29,11 @@ public class ChatMessage implements IChatMessage {
     }
 
     @Override
+    public Optional<String> getURL() {
+        return Optional.empty();
+    }
+
+    @Override
     public String toString() {
         return user.getScreenName() + ": " + message;
     }
