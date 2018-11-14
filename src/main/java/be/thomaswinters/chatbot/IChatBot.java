@@ -11,7 +11,7 @@ public interface IChatBot extends IReactingGenerator<String, IChatMessage> {
     Optional<String> generateReply(IChatMessage message);
 
     @Override
-    default Optional<String> generateRelated(IChatMessage input) {
+    default Optional<String> generate(IChatMessage input) {
         return generateReply(input);
     }
 
